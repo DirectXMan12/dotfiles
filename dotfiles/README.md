@@ -1,1 +1,1 @@
-# Non-Home-Manager Config Files
+# Non-Home-Manager Dotfiles

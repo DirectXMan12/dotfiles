@@ -16,7 +16,7 @@
 			# gcc
 		];
 
-		extraLuaConfig = builtins.readFile ./configs/nvim.lua;
+		extraLuaConfig = builtins.readFile ../snippets/nvim.lua;
 
 		plugins = with pkgs.vimPlugins; [
 			# system helpers

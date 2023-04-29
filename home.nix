@@ -3,7 +3,7 @@
 {
 	# load separate files
 	imports = [
-		./neovim.nix
+		./includes/neovim.nix
 	];
 
 	# Home Manager needs a bit of information about you and the paths it should
@@ -53,14 +53,14 @@
 
 	# (and for .config dirs)
 	xdg.configFile = {
-		"sway/config".source = dotfiles/sway/config;
-		"tofi/config".source = dotfiles/tofi/config;
+		"sway/config".source = xdg-configs/sway/config;
+		"tofi/config".source = xdg-configs/tofi/config;
 
-		"waybar/config".source = dotfiles/waybar/config;
-		"waybar/style.css".source = dotfiles/waybar/style.css;
+		"waybar/config".source = xdg-configs/waybar/config;
+		"waybar/style.css".source = xdg-configs/waybar/style.css;
 
-		"alacritty/alacritty.yml".source = dotfiles/alacritty/alacritty.yml;
-		"alacritty/solarized-dark-custom.yml".source = dotfiles/alacritty/solarized-dark-custom.yml;
+		"alacritty/alacritty.yml".source = xdg-configs/alacritty/alacritty.yml;
+		"alacritty/solarized-dark-custom.yml".source = xdg-configs/alacritty/solarized-dark-custom.yml;
 	};
 
 	# You can also manage environment variables but you will have to manually
