@@ -1,10 +1,10 @@
 * {
-    border: none;
-    border-radius: 0;
+	border: none;
+	border-radius: 0;
 	/* this is largely designed to work with FA6, but the brightness stuff is from FA */
 	font-family: sans-serif, "Font Awesome 6 Free", "Deja Vu Sans Mono Nerd";
-    font-size: 13px;
-    min-height: 0;
+	font-size: 13px;
+	min-height: 0;
 }
 
 /* boost the font size on the laptop to compensate for no scaling,
@@ -12,67 +12,67 @@
 /* not needed now that we have scale-factor 2 */
 /*
 .eDP-1 * {
-    font-size: 26px;
+	font-size: 26px;
 }
 */
 
 window#waybar {
-    /*background-color: rgba(43, 48, 59, 0.5);*/
-    background-color: #002b36;
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-    color: #93a1a1;
-    transition-property: background-color;
-    transition-duration: .5s;
+	/*background-color: rgba(43, 48, 59, 0.5);*/
+	background-color: #002b36;
+	border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+	color: #93a1a1;
+	transition-property: background-color;
+	transition-duration: .5s;
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+	opacity: 0.2;
 }
 
 /*
 window#waybar.empty {
-    background-color: transparent;
+	background-color: transparent;
 }
 window#waybar.solo {
-    background-color: #FFFFFF;
+	background-color: #FFFFFF;
 }
 */
 
 window#waybar.termite {
-    background-color: #3F3F3F;
+	background-color: #3F3F3F;
 }
 
 window#waybar.chromium {
-    background-color: #000000;
-    border: none;
+	background-color: #000000;
+	border: none;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #93a1a1;
-    border-bottom: 3px solid transparent;
+	padding: 0 5px;
+	background-color: transparent;
+	color: #93a1a1;
+	border-bottom: 3px solid transparent;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: inherit;
-    border-bottom: 3px solid #93a1a1;
+	background: rgba(0, 0, 0, 0.2);
+	box-shadow: inherit;
+	border-bottom: 3px solid #93a1a1;
 }
 
 #workspaces button.focused {
-    background-color: #073642;
-    border-bottom: 3px solid #93a1a1;
+	background-color: #073642;
+	border-bottom: 3px solid #93a1a1;
 }
 
 #workspaces button.urgent {
-    background-color: #d33682;
+	background-color: #d33682;
 }
 
 #mode {
-    background-color: #002b36;
-    border-bottom: 3px solid #93a1a1;
+	background-color: #002b36;
+	border-bottom: 3px solid #93a1a1;
 }
 
 #clock,
@@ -88,112 +88,112 @@ window#waybar.chromium {
 #mode,
 #idle_inhibitor,
 #mpd {
-    padding: 0 10px;
-    margin: 0 4px;
-    color: #93a1a1;
+	padding: 0 10px;
+	margin: 0 4px;
+	color: #93a1a1;
 }
 
 #clock {
-    background-color: #073642;
+	background-color: #073642;
 }
 
 #battery {
-    background-color: #073642;
+	background-color: #073642;
 }
 
 #battery.charging {
-    color: #eee8d5;
-    background-color: #859900;
+	color: #eee8d5;
+	background-color: #859900;
 }
 
 #battery.bat0, #battery.bat1 {
-    color: rgba(238, 232, 213, 0.75);
-    /*background-color: rgba(38, 166, 91, 0.5);*/
-    font-size: 69%;
-    padding: 0;
+	color: rgba(238, 232, 213, 0.75);
+	/*background-color: rgba(38, 166, 91, 0.5);*/
+	font-size: 69%;
+	padding: 0;
 }
 #battery.bat0:not(.charging), #battery.bat1:not(.charging) {
-    color: rgba(147, 161, 161, 0.75);
+	color: rgba(147, 161, 161, 0.75);
 }
 
 #battery.total {
-    margin-right: 0;
-    padding-right: 2px;
+	margin-right: 0;
+	padding-right: 2px;
 }
 #battery.bat0 {
-    margin: 0;
+	margin: 0;
 }
 #battery.bat1 {
-    margin-left: 0;
-    padding-right: 4px;
+	margin-left: 0;
+	padding-right: 4px;
 }
 
 @keyframes blink {
-    to {
-        background-color: #d33682;
-        color: #93a1a1;
-    }
+	to {
+		background-color: #d33682;
+		color: #93a1a1;
+	}
 }
 
 #battery.critical:not(.charging) {
-    background-color: #dc322f;
-    color: #93a1a1;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+	background-color: #dc322f;
+	color: #93a1a1;
+	animation-name: blink;
+	animation-duration: 0.5s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
 }
 
 label:focus {
-    background-color: #073642;
+	background-color: #073642;
 }
 
 #cpu {
-    background-color: #073642;
+	background-color: #073642;
 }
 
 #memory {
-    background-color: #073642;
+	background-color: #073642;
 }
 
 #backlight {
-    background-color: #073642;
+	background-color: #073642;
 }
 
 #network {
-    background-color: #073642;
+	background-color: #073642;
 }
 
 #network.disconnected {
-    background-color: #002b36;
+	background-color: #002b36;
 }
 
 #pulseaudio {
-    background-color: #073642;
+	background-color: #073642;
 }
 
 #pulseaudio.muted {
-    background-color: #002b36;
-    color: #2a5c45;
+	background-color: #002b36;
+	color: #2a5c45;
 }
 
 #temperature {
-    background-color: #073642;
+	background-color: #073642;
 }
 
 #temperature.critical {
-    background-color: #dc322f;
+	background-color: #dc322f;
 }
 
 #tray {
-    background-color: #002b36;
+	background-color: #002b36;
 }
 
 #idle_inhibitor {
-    background-color: #002b36;
+	background-color: #002b36;
 }
 
 #idle_inhibitor.activated {
-    background-color: #073642;
+	background-color: #073642;
 }
