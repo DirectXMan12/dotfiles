@@ -1,0 +1,100 @@
+# colors
+zsh-plugin() {
+	source $ZSH_PLUGIN_DIR/${1?must provide a plugin name}/${1}.zsh
+}
+
+ZSH_PLUGIN_DIR=$HOME/.local/share/zsh-plugins
+eval $(dircolors $ZSH_PLUGIN_DIR/zsh-dircolors-solarized/dircolors-solarized/dircolors.ansi-dark)
+export ZLS_COLORS="${LS_COLORS}"
+
+# general completion options
+zstyle ':completion:*' menu select=1
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' completer _expand _complete _ignored
+# TODO(directxman12): port the case-insensitive matching?
+# zstyle :compinstall filename '/home/directxman12/.zshrc' # TODO(directxman12): what is this?
+# use caching
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path $HOME/.cache/zsh-comp-cache
+
+# specific completers
+# for kill
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*' force-list always
+zstyle ':completion:*:processes' command 'ps -o pid,tty,time,args -U $(whoami) | sed "/ps/d"'
+zstyle ':completion:*:processes' insert-ids menu yes select
+
+# completion modules
+autoload -Uz compinit
+compinit
+
+zmodload zsh/complist
+
+# history options
+HISTFILE=~/.local/share/histfile.zsh
+HISTSIZE=2000
+SAVEHIST=2000
+unsetopt beep
+
+# prompt
+# the %2{ %} ensures that zsh counts the emoji correctly
+# (it needs to be counted as two characters, for some reason, otherwise history search gets confused)
+# manually hack some colors b/c solarized bolds don't match up well (bold magenta is blue,
+# 142 is close to non-bold green
+PROMPT="%B%(!.%F{red}.%F{142})%n@%2{💻%}%k %B%F{magenta}%~ %(!.#.$) %b%f%k"
+
+# auto pushd (run pushd on cd)
+setopt AUTO_PUSHD
+DIRSTACKSIZE=20 # no more than 20 pops
+setopt PUSHD_SILENT # do not print directory after pushd or popd
+setopt PUSHD_IGNORE_DUPS # what it says on the tin
+
+# like ctrl-r, but more fish-y
+zsh-plugin zsh-history-substring-search
+bindkey -M emacs "^[[5;5~" history-substring-search-up # C-PgUp
+bindkey -M emacs "^[[6;5~" history-substring-search-down # C-PgDown
+
+# fix home & end & delete
+bindkey -M emacs "${terminfo[khome]}" beginning-of-line
+bindkey -M emacs "${terminfo[kend]}" end-of-line
+bindkey -M emacs "${terminfo[kdch1]}" delete-char
+
+# this next bit is copied from the system-wide zsh file in nixos
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+	function zle-line-init () {
+		printf '%s' "${terminfo[smkx]}"
+	}
+	function zle-line-finish () {
+		printf '%s' "${terminfo[rmkx]}"
+	}
+	zle -N zle-line-init
+	zle -N zle-line-finish
+fi
+
+# go to emacs mode (yeah yeah I know)
+bindkey -e
+
+# autosuggestions
+zsh-plugin zsh-autosuggestions
+
+# set title
+__alacritty_title() {
+	printf "\033]0;%s%s\007" "${HOSTNAME:-}" "${PWD/#$HOME/~}"
+}
+if [[ $TERM == 'alacritty' ]]; then
+	precmd_functions+=(__alacritty_title)
+fi
+
+# helper functions
+term-at() {
+	local target=${1:-$PWD}
+	swaymsg exec '$term'" --working-directory ${target}"
+}
+autoload -U zcalc zmv zargs
+
+# syntax higlighting (must be last?)
+zsh-plugin zsh-syntax-highlighting
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
