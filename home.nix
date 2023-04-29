@@ -87,7 +87,10 @@
 		enable = true;
 		userEmail = "directxman12+gh@gmail.com";
 		userName = "Solly Ross";
-		extraConfig = { init.defaultBranch = "main"; };
+		extraConfig = {
+			init.defaultBranch = "main";
+			safe.directory = ["/etc/nixos"];
+		};
 	};
 
 	# Let Home Manager install and manage itself.
