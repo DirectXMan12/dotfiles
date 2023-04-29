@@ -22,8 +22,8 @@ api.nvim_set_hl(0, 'DiagnosticWarn', { fg='#6d6316' })
 
 ---- General Settings ---
 -- indent stuff
-opt.ts = 4
-opt.sw = 4
+opt.ts = 2
+opt.sw = 2
 opt.autoindent = true
 opt.expandtab = false -- tabs ftw
 
