@@ -68,6 +68,15 @@
 	},
 	"battery#bat2": {
 		"bat": "BAT2"
+	},
+	"pulseaudio": {
+		"on-click": "pavucontrol",
+		"format-icons": {
+			"headphone": "",
+			"default": ["", ""]
+		},
+		"format": "{icon} {volume}%",
+		"format-muted": ""
 	}
 }
 
