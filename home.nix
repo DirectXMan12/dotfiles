@@ -61,6 +61,8 @@
 
 		"alacritty/alacritty.yml".source = xdg-configs/alacritty/alacritty.yml;
 		"alacritty/solarized-dark-custom.yml".source = xdg-configs/alacritty/solarized-dark-custom.yml;
+
+		"swaylock/config".source = xdg-configs/swaylock/config;
 	};
 
 	# You can also manage environment variables but you will have to manually
