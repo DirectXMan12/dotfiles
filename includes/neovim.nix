@@ -94,13 +94,13 @@
 							vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
 
 							-- diagnostics
-							vim.keymap.set('n', '<leader>e', vim.lsp.buf.open_float, opts)
-							vim.keymap.set('n', '[d', vim.lsp.buf.goto_prev, opts)
-							vim.keymap.set('n', ']d', vim.lsp.buf.goto_next, opts)
-							vim.keymap.set('n', '<leader>q', vim.lsp.buf.setloclist, opts)
+							vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+							vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+							vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+							vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
 							-- telescope
-							vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_reference, opts)
+							vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, opts)
 						end
 					})
 				'';
