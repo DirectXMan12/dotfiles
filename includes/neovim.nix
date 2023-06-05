@@ -87,6 +87,7 @@
 							-- info & nav
 							vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 							vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+							vim.keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, opts) -- leader to avoid overlap with gt (tabnext)
 							vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 							vim.keymap.set('n', '<leader>=', vim.lsp.buf.format, opts)
 							vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
@@ -101,6 +102,9 @@
 
 							-- telescope
 							vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, opts)
+
+							-- always show the sign column, so we don't flicker
+							vim.opt.signcolumn = 'yes'
 						end
 					})
 				'';

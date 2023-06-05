@@ -29,6 +29,8 @@
 		zsh
 		nushell
 		tree
+		unzip
+		dig
 		# google-chrome-dev # moving to system level to match pipewire?
 
 		# # You can also create simple shell scripts directly inside your
