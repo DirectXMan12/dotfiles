@@ -57,6 +57,7 @@
 	xdg.configFile = {
 		"sway/config".source = xdg-configs/sway/config;
 		"tofi/config".source = xdg-configs/tofi/config;
+		"kanshi/config".source = xdg-configs/kanshi/config;
 
 		"waybar/config".source = xdg-configs/waybar/config;
 		"waybar/style.css".source = xdg-configs/waybar/style.css;
