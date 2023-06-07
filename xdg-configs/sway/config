@@ -139,6 +139,13 @@ default_border pixel
 	# custom named workspaces
 	bindsym $mod+slash exec swaymsg -t get_workspaces | jq '.[].name' -r | tofi --prompt-text "switch to " --require-match=false | xargs swaymsg workspace
 	bindsym $mod+Shift+slash exec swaymsg -t get_workspaces | jq '.[].name' -r | tofi --prompt-text "send to " --require-match=false | xargs swaymsg move container to workspace
+
+	# moving workspaces
+	bindsym $mod+Shift+w move workspace to output left
+	bindsym $mod+Shift+e move workspace to output up
+	bindsym $mod+Shift+r move workspace to output right
+	bindsym $mod+Shift+d move workspace to output down
+	bindsym $mod+Shift+o exec swaymsg -t get_outputs | jq '.[].name' -r | tofi --prompt-text "move workspace to " --require-match=true | xargs swaymsg move workspace to output
 #
 # Layout stuff:
 #
