@@ -214,6 +214,11 @@ bindsym $extraMod+c exec $browser
 # session lock
 bindsym $extraMod+l exec loginctl lock-session
 
+# screenshots
+bindsym Print exec grimshot copy screen
+bindsym Shift+Print exec grimshot copy area
+bindsym $mod+Shift+Print exec grimshot save active
+
 #
 # Status Bar:
 #
