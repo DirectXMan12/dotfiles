@@ -42,7 +42,10 @@ unsetopt beep
 # (it needs to be counted as two characters, for some reason, otherwise history search gets confused)
 # manually hack some colors b/c solarized bolds don't match up well (bold magenta is blue,
 # 142 is close to non-bold green
-PROMPT="%B%(!.%F{red}.%F{142})%n@%2{💻%}%k %B%F{magenta}%~ %(!.#.$) %b%f%k"
+# the weird manual escape in the middle is an OSC 8 url escape, that, coupled with an
+# xdg-open mime type for term-at:// causes clicking to open a new terminal at that entry
+# the $'' causes \e escapes to be interpretted
+PROMPT=$'%B%(!.%F{red}.%F{142})%n@%2{💻%}%k %B%F{magenta}%{\e]8;;term-at://%/\e\\%}%~%{\e]8;;\e\\%} %(!.#.$) %b%f%k'
 
 # auto pushd (run pushd on cd)
 setopt AUTO_PUSHD

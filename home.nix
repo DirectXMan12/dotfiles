@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
 
+let
+	# don't actually install this
+	term-at-opener = pkgs.writeShellScriptBin "term-at.sh" (builtins.readFile ./scripts/term-at.sh);
+
+in
+
 {
 	# load separate files
 	imports = [
@@ -63,6 +69,21 @@
 		"alacritty/solarized-dark-custom.yml".source = xdg-configs/alacritty/solarized-dark-custom.yml;
 
 		"swaylock/config".source = xdg-configs/swaylock/config;
+	};
+	xdg.mimeApps = {
+		defaultApplications = {
+			"x-scheme-handler/term-at" = ["term-at-scheme-handler.desktop"];
+		};
+	};
+	xdg.desktopEntries = {
+		term-at-scheme-handler = {
+			name = "term-at Scheme Handler";
+			exec = "${term-at-opener}/bin/term-at.sh %u";
+			type = "Application";
+			terminal = false;
+			startupNotify = false;
+			mimeType = [ "x-scheme-handler/term-at" ];
+		};
 	};
 
 	# You can also manage environment variables but you will have to manually
