@@ -29,32 +29,34 @@
 
 						-- select by param, and such
 						textobjects = {
-							enable = true,
-							keymaps = {
-								["ia"] = "@parameter.inner",
-								["aa"] = "@parameter.out",
+							select = {
+								enable = true,
+								keymaps = {
+									["ia"] = "@parameter.inner",
+									["aa"] = "@parameter.out",
+								},
 							},
-						},
 
-						-- move between params and such
-						move = {
-							enable = true,
-							set_jumps = true,
-							goto_next_start = {
-								["]m"] = "@function.outer",
-								["]a"] = "@parameter.inner",
-							},
-							goto_next_end = {
-								["]M"] = "@function.outer",
-								["]A"] = "@parameter.outer",
-							},
-							goto_previous_start = {
-								["[m"] = "@function.outer",
-								["[a"] = "@parameter.inner",
-							},
-							goto_previous_end = {
-								["[M"] = "@function.outer",
-								["[A"] = "@parameter.outer",
+							-- move between params and such
+							move = {
+								enable = true,
+								set_jumps = true,
+								goto_next_start = {
+									["]m"] = "@function.outer",
+									["]a"] = "@parameter.inner",
+								},
+								goto_next_end = {
+									["]M"] = "@function.outer",
+									["]A"] = "@parameter.outer",
+								},
+								goto_previous_start = {
+									["[m"] = "@function.outer",
+									["[a"] = "@parameter.inner",
+								},
+								goto_previous_end = {
+									["[M"] = "@function.outer",
+									["[A"] = "@parameter.outer",
+								},
 							},
 						},
 
@@ -72,6 +74,9 @@
 					}
 				'';
 			}
+			nvim-treesitter-textobjects # change-in-arg and such
+			nvim-treesitter-refactor # change-in-arg and such
+			playground # nice for debugging weird editor issues
 			# lsp configs & helpers
 			{
 				plugin = nvim-lspconfig;
