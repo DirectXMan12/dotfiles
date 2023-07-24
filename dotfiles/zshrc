@@ -6,6 +6,7 @@ zsh-plugin() {
 ZSH_PLUGIN_DIR=$HOME/.local/share/zsh-plugins
 eval $(dircolors $ZSH_PLUGIN_DIR/zsh-dircolors-solarized/dircolors-solarized/dircolors.ansi-dark)
 export ZLS_COLORS="${LS_COLORS}"
+alias ls="ls --color=auto"
 
 # general completion options
 zstyle ':completion:*' menu select=1
