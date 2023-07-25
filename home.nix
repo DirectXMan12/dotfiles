@@ -34,6 +34,12 @@ in
 		tree
 		unzip
 		dig
+		bat
+		fd
+		ripgrep
+		wget
+		curl
+
 		# google-chrome-dev # moving to system level to match pipewire?
 
 		# # You can also create simple shell scripts directly inside your
@@ -42,6 +48,12 @@ in
 		# (pkgs.writeShellScriptBin "my-hello" ''
 		#		echo "Hello, ${config.home.username}!"
 		# '')
+
+		# fonts for all this stuff
+		font-awesome
+		(nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
+		noto-fonts
+		dejavu_fonts
 	];
 
 	# Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -69,6 +81,7 @@ in
 		"alacritty/solarized-dark-custom.yml".source = xdg-configs/alacritty/solarized-dark-custom.yml;
 
 		"swaylock/config".source = xdg-configs/swaylock/config;
+		"fontconfig/conf.d/52-default-fonts.conf".source = xdg-configs/fontconfig/52-default-fonts.conf;
 	};
 	xdg.mimeApps = {
 		enable = true;
@@ -108,6 +121,8 @@ in
 		# already set below by programs.neovim
 		# EDITOR = "vim";
 	};
+
+	fonts.fontconfig.enable = true;
 
 	#
 	# programs
