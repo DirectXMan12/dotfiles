@@ -71,8 +71,16 @@ in
 		"swaylock/config".source = xdg-configs/swaylock/config;
 	};
 	xdg.mimeApps = {
+		enable = true;
 		defaultApplications = {
 			"x-scheme-handler/term-at" = ["term-at-scheme-handler.desktop"];
+
+			# manually manage chrome's defaults
+			"text/html" = ["google-chrome-unstable.desktop"];
+			"x-scheme-handler/http" = ["google-chrome-unstable.desktop"];
+			"x-scheme-handler/https" = ["google-chrome-unstable.desktop"];
+			"x-scheme-handler/about" = ["google-chrome-unstable.desktop"];
+			"x-scheme-handler/unknown" = ["google-chrome-unstable.desktop"];
 		};
 	};
 	xdg.desktopEntries = {
