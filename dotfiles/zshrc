@@ -99,6 +99,10 @@ term-at() {
 }
 autoload -U zcalc zmv zargs
 
+# helper for sudo while opting to keeping PATH
+# (good for nix stuff)
+alias nsudo="sudo env PATH=$PATH"
+
 # syntax higlighting (must be last?)
 zsh-plugin zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
