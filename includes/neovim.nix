@@ -123,7 +123,7 @@
 				type = "lua";
 				config = ''
 					require('lualine').setup {
-						options = { theme = 'solarized_dark' },
+						options = { theme = 'solarized' },
 						sections = {
 							-- show relative path instead of just filename
 							lualine_c = {{'filename', path = 1}},
