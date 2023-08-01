@@ -1,8 +1,12 @@
-# colors
+# helper for loading plugins
 zsh-plugin() {
 	source $ZSH_PLUGIN_DIR/${1?must provide a plugin name}/${1}.zsh
 }
 
+# home-manger env vars (like XDG_DATA_DIRS)
+source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+
+# colors
 ZSH_PLUGIN_DIR=$HOME/.local/share/zsh-plugins
 eval $(dircolors $ZSH_PLUGIN_DIR/zsh-dircolors-solarized/dircolors-solarized/dircolors.ansi-dark)
 export ZLS_COLORS="${LS_COLORS}"
