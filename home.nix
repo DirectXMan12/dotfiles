@@ -53,6 +53,7 @@ in
 		font-awesome
 		(nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
 		noto-fonts
+		noto-fonts-emoji
 		dejavu_fonts
 	];
 
