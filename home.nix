@@ -81,6 +81,9 @@ in
 		"alacritty/alacritty.yml".source = xdg-configs/alacritty/alacritty.yml;
 		"alacritty/solarized-dark-custom.yml".source = xdg-configs/alacritty/solarized-dark-custom.yml;
 		"alacritty/solarized-light.yml".source = xdg-configs/alacritty/solarized-light.yml;
+		"alacritty/alacritty.toml".source = xdg-configs/alacritty/alacritty.toml;
+		"alacritty/solarized-dark-custom.toml".source = xdg-configs/alacritty/solarized-dark-custom.toml;
+		"alacritty/solarized-light.toml".source = xdg-configs/alacritty/solarized-light.toml;
 
 		"swaylock/config".source = xdg-configs/swaylock/config;
 		"fontconfig/conf.d/52-default-fonts.conf".source = xdg-configs/fontconfig/52-default-fonts.conf;

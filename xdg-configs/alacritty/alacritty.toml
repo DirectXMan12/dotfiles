@@ -1,0 +1,26 @@
+import = ["/home/directxman12/.config/alacritty/solarized-dark-custom.toml"]
+live_config_reload = true
+
+[bell]
+duration = 0
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.mouse]
+enabled = true
+mods = "Control"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+[window.padding]
+x = 0
+y = 0
