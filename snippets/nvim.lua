@@ -11,7 +11,7 @@ local api = vim.api
 
 ---- Visual Settings ----
 opt.termguicolors = true      -- first, for solarized we need 24-bit color...
-cmd [[colorscheme solarized]] -- ... then actually enable it
+cmd.colorscheme 'solarized'   -- ... then actually enable it
 
 -- make lsp & TS errors more tolerable
 api.nvim_set_hl(0, 'TSError', { link = 'normal' })
@@ -46,4 +46,3 @@ vim.g.mapleader = " " -- <space>
 -- ln is normally lnoremap, which has like zero need for an abbreviation;
 -- lne is a much better use
 cmd.cabbrev('ln', 'lne')
-

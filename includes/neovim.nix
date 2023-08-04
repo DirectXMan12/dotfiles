@@ -133,14 +133,10 @@
 			}
 			nvim-web-devicons # ... and the fancy icons it requires..
 			# ... and the tabline that also uses them
-			# override till we get past 06-13-2023 upstream
-			(barbar-nvim.overrideAttrs (final: old: {
-				src = old.src.override {
-					rev = "c5e120848c1e505090684589b3adbedac9dcb893";
-					sha256 = "0v2kalfs0xvqbpksnypab7q114s2q13d36ayyjx7anzgs085i06i";
-				};
-				name = "vimplugin-barbar.nvim-2023-06-13";
-			}))
+			# barbar is nice, but causes flickers in light mode
+			# consider switching to cokeline, lualine builtin, or heirline
+			# if it becomes too annoying
+			barbar-nvim
 
 			# external integrations
 			vim-fugitive # git!

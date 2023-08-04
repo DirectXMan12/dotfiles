@@ -11,6 +11,7 @@ ZSH_PLUGIN_DIR=$HOME/.local/share/zsh-plugins
 eval $(dircolors $ZSH_PLUGIN_DIR/zsh-dircolors-solarized/dircolors-solarized/dircolors.ansi-dark)
 export ZLS_COLORS="${LS_COLORS}"
 alias ls="ls --color=auto"
+export BAT_THEME="Solarized (dark)"
 
 # general completion options
 zstyle ':completion:*' menu select=1
@@ -106,6 +107,25 @@ autoload -U zcalc zmv zargs
 # helper for sudo while opting to keeping PATH
 # (good for nix stuff)
 alias nsudo="sudo env PATH=$PATH"
+
+light-mode() {
+	alap -w=all ~/.config/alacritty/solarized-light.toml
+	gsettings set org.gnome.desktop.interface color-scheme prefer-light
+}
+
+dark-mode() {
+	alap -w=all ~/.config/alacritty/solarized-dark-custom.toml
+	gsettings reset org.gnome.desktop.interface color-scheme
+}
+
+is-light-mode() {
+	[[ "$(gsettings get org.gnome.desktop.interface color-scheme)" == "'prefer-light'" ]]
+}
+
+# do this in zsh till alacritty gets support for copying overrides
+if [[ -o interactive ]] && is-light-mode; then
+	alap ~/.config/alacritty/solarized-light.toml
+fi
 
 # syntax higlighting (must be last?)
 zsh-plugin zsh-syntax-highlighting
