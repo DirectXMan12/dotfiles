@@ -2,7 +2,8 @@
 
 let
 	# don't actually install this
-	term-at-opener = pkgs.writeShellScriptBin "term-at.sh" (builtins.readFile ./scripts/term-at.sh);
+	term-at-opener = pkgs.writeScriptBin "term-at.sh" (builtins.readFile ./scripts/term-at.sh);
+	github-opener = pkgs.writeScriptBin "open-github.nu" (builtins.readFile ./scripts/open-github.nu);
 
 in
 
@@ -93,6 +94,7 @@ in
 		enable = true;
 		defaultApplications = {
 			"x-scheme-handler/term-at" = ["term-at-scheme-handler.desktop"];
+			"x-scheme-handler/github" = ["github-scheme-handler.desktop"];
 
 			# manually manage chrome's defaults
 			"text/html" = ["google-chrome-unstable.desktop"];
@@ -110,6 +112,14 @@ in
 			terminal = false;
 			startupNotify = false;
 			mimeType = [ "x-scheme-handler/term-at" ];
+		};
+		github-scheme-handler = {
+			name = "github Scheme Handler";
+			exec = "${github-opener}/bin/open-github.nu %u";
+			type = "Application";
+			terminal = false;
+			startupNotify = false;
+			mimeType = [ "x-scheme-handler/github" ];
 		};
 	};
 
