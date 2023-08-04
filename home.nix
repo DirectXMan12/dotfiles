@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, alacritty-apply, ... }:
 
 let
 	# don't actually install this
@@ -39,6 +39,7 @@ in
 		ripgrep
 		wget
 		curl
+		alacritty-apply.packages.${system}.default
 
 		# google-chrome-dev # moving to system level to match pipewire?
 
