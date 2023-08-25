@@ -107,6 +107,8 @@
 
 							-- telescope
 							vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, opts)
+							vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, opts)
+							vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, opts)
 
 							-- always show the sign column, so we don't flicker
 							vim.opt.signcolumn = 'yes'
