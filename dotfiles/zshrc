@@ -122,11 +122,6 @@ is-light-mode() {
 	[[ "$(gsettings get org.gnome.desktop.interface color-scheme)" == "'prefer-light'" ]]
 }
 
-# do this in zsh till alacritty gets support for copying overrides
-if [[ -o interactive ]] && is-light-mode; then
-	alap ~/.config/alacritty/solarized-light.toml
-fi
-
 # syntax higlighting (must be last?)
 zsh-plugin zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
