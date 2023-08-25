@@ -59,6 +59,8 @@ in
 		(nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
 		noto-fonts
 		noto-fonts-emoji
+		noto-fonts-cjk-serif
+		noto-fonts-cjk-sans
 		dejavu_fonts
 	];
 
