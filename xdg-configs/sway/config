@@ -145,7 +145,7 @@ default_border pixel
 	bindsym $mod+Shift+e move workspace to output up
 	bindsym $mod+Shift+r move workspace to output right
 	bindsym $mod+Shift+d move workspace to output down
-	bindsym $mod+Shift+o exec swaymsg -t get_outputs | jq '.[].name' -r | tofi --prompt-text "move workspace to " --require-match=true | xargs swaymsg move workspace to output
+	bindsym $mod+Shift+o exec move-ws-to-output
 #
 # Layout stuff:
 #

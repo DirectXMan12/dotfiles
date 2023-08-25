@@ -4,6 +4,7 @@ let
 	# don't actually install this
 	term-at-opener = pkgs.writeScriptBin "term-at.sh" (builtins.readFile ./scripts/term-at.sh);
 	github-opener = pkgs.writeScriptBin "open-github.nu" (builtins.readFile ./scripts/open-github.nu);
+	move-ws-to-output = pkgs.writeScriptBin "move-ws-to-output" (builtins.readFile ./scripts/move-ws-to-output.nu);
 
 in
 
@@ -50,6 +51,8 @@ in
 		# (pkgs.writeShellScriptBin "my-hello" ''
 		#		echo "Hello, ${config.home.username}!"
 		# '')
+
+		move-ws-to-output
 
 		# fonts for all this stuff
 		font-awesome
