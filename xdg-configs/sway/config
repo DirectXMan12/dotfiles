@@ -22,10 +22,12 @@ set $term zsh -c 'alacritty msg create-window "$@" || alacritty "$@"' --
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu tofi-run | xargs swaymsg exec --
+set $menu tofi-run --require-match=false | xargs swaymsg exec --
 
 # TODO(directxman12): switch to unstable when fullscreening & pipewire don't cause crashes
 set $browser google-chrome-unstable --enable-features=UseOzonePlatform --ozone-platform=wayland
+
+set $cage cage -d --
 
 ### Output configuration
 #
@@ -71,6 +73,7 @@ default_border pixel
 
 	# Start your launcher
 	bindsym $mod+p exec $menu
+	bindsym $mod+x exec echo "" | tofi --prompt "nix run nixpkgs#" --require-match=false | cut -d' ' -f1- | awk '{fst=$1; $1=""; print "nixpkgs#" fst " --" $0 }' | xargs swaymsg exec -- nix run
 
 	# Drag floating windows by holding down $mod and left mouse button.
 	# Resize them with right mouse button + $mod.
