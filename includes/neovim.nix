@@ -33,7 +33,7 @@
 								enable = true,
 								keymaps = {
 									["ia"] = "@parameter.inner",
-									["aa"] = "@parameter.out",
+									["aa"] = "@parameter.outer",
 								},
 							},
 
