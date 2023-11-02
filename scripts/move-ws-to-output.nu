@@ -5,7 +5,7 @@ def main [] {
 		match $e.model {
 			'LG ULTRAGEAR' => {display: 'main', id: $e.name},
 			'P2718EC' => {display: 'vertical', id: $e.name},
-			_ if $e.name == 'eDP-1' => {display: 'builtin', id: $e.name},
+			_ if ($e.name | str starts-with 'eDP-') => {display: 'builtin', id: $e.name},
 			_ => {display: $e.model, id: $e.name}
 		}
 	}
