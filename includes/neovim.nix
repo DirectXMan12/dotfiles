@@ -85,6 +85,10 @@
 					vim.api.nvim_create_autocmd({'LspAttach'}, {
 						group = vim.api.nvim_create_augroup('UserLspConfig', {}),
 						callback = function(ev)
+							-- show the spinner thing
+							require'fidget'.setup{}
+
+							-- keymappings
 							-- enable omnifunc completion
 							vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
@@ -114,6 +118,14 @@
 							vim.opt.signcolumn = 'yes'
 						end
 					})
+				'';
+			}
+			# show lsp status
+			{
+				plugin = fidget-nvim;
+				type = "lua";
+				config = ''
+					-- configured above in the lsp-config autocmd
 				'';
 			}
 
