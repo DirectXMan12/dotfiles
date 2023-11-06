@@ -43,6 +43,15 @@ in
 		curl
 		alacritty-apply.packages.${system}.default
 
+		# till the latest in nixos
+		(obsidian.overrideAttrs rec {
+			version = "1.4.16";
+			src = fetchurl {
+				url = "https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/obsidian-${version}.tar.gz";
+				hash = "sha256-PBKLGs3MZyarSMiWnjqY7d9bQrKu2uLAvLUufpHLxcw=";
+			};
+		})
+
 		# google-chrome-dev # moving to system level to match pipewire?
 
 		# # You can also create simple shell scripts directly inside your

@@ -31,6 +31,7 @@
 				modules = [
 				 ({config, pkgs, ...}: { nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
 						 "google-chrome-dev"
+						 "obsidian"
 					 ];
 				 })
 				 ./home.nix

@@ -1,5 +1,18 @@
 { config, pkgs, ... }:
 
+let
+	obsidian-nvim = pkgs.vimUtils.buildVimPlugin {
+		pname = "obsidian.nvim";
+		version = "1.14.3-alpha.1";
+
+		src = pkgs.fetchFromGitHub {
+			owner = "epwalsh";
+			repo = "obsidian.nvim";
+			rev = "25f57d541361548f8b5873809e0907d646c5f3f4";
+			hash = "sha256-GmfstS3XisMh2/Wzo4zvFz4OYDDPh1QKi9Ap3Y3EuOo=";
+		};
+	};
+in
 {
 	programs.neovim = {
 		enable = true;
@@ -173,6 +186,15 @@
 								},
 							},
 						},
+					}
+				'';
+			}
+			{
+				plugin = obsidian-nvim;
+				type = "lua";
+				config = ''
+					require('obsidian').setup{
+						dir = "~/Documents/obsidian/notes",
 					}
 				'';
 			}
