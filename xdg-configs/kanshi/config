@@ -1,7 +1,7 @@
 profile desk {
 	output eDP-1 position 1440,1440
-	output DP-3 mode 2560x1440 position 0,0 transform 90
-	output DP-4 mode 2560x1440 position 1440,0
+	output 'LG Electronics LG ULTRAGEAR 108MXXQ5H450' mode 2560x1440 position 1440,0 transform normal
+	output 'Google Inc. P2718EC C8211679' mode 2560x1440 position 0,0 transform 90
 }
 
 profile mobile {
