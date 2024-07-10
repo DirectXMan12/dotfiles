@@ -24,8 +24,9 @@ set $term zsh -c 'alacritty msg create-window "$@" || alacritty "$@"' --
 # on the original workspace that the command was run on.
 set $menu tofi-run --require-match=false | xargs swaymsg exec --
 
-# TODO(directxman12): switch to unstable when fullscreening & pipewire don't cause crashes
-set $browser google-chrome-unstable --enable-features=UseOzonePlatform --ozone-platform=wayland
+# TODO(directxman12): switch to unstable when i can patch it back in
+#set $browser google-chrome-unstable --enable-features=UseOzonePlatform --ozone-platform=wayland
+set $browser google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 set $cage cage -d --
 
