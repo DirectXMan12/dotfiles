@@ -8,8 +8,19 @@ let
 		src = pkgs.fetchFromGitHub {
 			owner = "epwalsh";
 			repo = "obsidian.nvim";
-			rev = "25f57d541361548f8b5873809e0907d646c5f3f4";
-			hash = "sha256-GmfstS3XisMh2/Wzo4zvFz4OYDDPh1QKi9Ap3Y3EuOo=";
+			rev = "430bee736fc48170362f38ba1217596d241abdaa";
+			hash = "sha256-qV2gfNU7Du0JsM3CwaoW/w+JZ5N4JCGfEGr/tC3TVwM=";
+		};
+	};
+	# upstream isn't up-to-date with treesitter
+	nvim-solarized-lua-local = pkgs.vimUtils.buildVimPlugin {
+		pname = "nvim-solarized-lua";
+		version = "1.0-2024-02-03";
+		src = pkgs.fetchFromGitHub {
+			owner = "directxman12";
+			repo = "nvim-solarized-lua";
+			rev = "479f442f518f9acb3d57f2ebc7b2146044d3b8a5";
+      sha256 = "sha256-l/bTVBpjB187DdvWA+mP0vVXUF/3jItn3OLEh4YnU9k=";
 		};
 	};
 in
@@ -143,7 +154,7 @@ in
 			}
 
 			# visual
-			nvim-solarized-lua # colors! with treesitter support
+			{ plugin = nvim-solarized-lua-local; } # colors! with treesitter support
 			# status line...
 			{
 				plugin = lualine-nvim;
@@ -195,6 +206,7 @@ in
 				config = ''
 					require('obsidian').setup{
 						dir = "~/Documents/obsidian/notes",
+						disable_frontmatter = true,
 					}
 				'';
 			}
