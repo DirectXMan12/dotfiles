@@ -29,12 +29,17 @@
 				# Specify your home configuration modules here, for example,
 				# the path to your home.nix.
 				modules = [
-				 ({config, pkgs, ...}: { nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
-						 "google-chrome-dev"
-						 "obsidian"
-					 ];
-				 })
-				 ./home.nix
+					({config, pkgs, ...}: {
+						nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+							"google-chrome-dev"
+							"obsidian"
+						];
+
+						nixpkgs.config.permittedInsecurePackages = [
+							"electron-25.9.0" # for obsidian, for a bit
+						];
+					})
+					./home.nix
 				];
 
 				# Optionally use extraSpecialArgs
