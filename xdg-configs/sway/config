@@ -1,5 +1,4 @@
-# Default config for sway
-#
+# Default config for sway #
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
 # Read `man 5 sway` for a complete reference.
@@ -35,6 +34,8 @@ set $cage cage -d --
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
 # TODO(directxman12): wallpaper
 # output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# darkened solarize $base01, looks nice
+output * bg '#3f4f54' solid_color
 
 ### Idle configuration
 #
