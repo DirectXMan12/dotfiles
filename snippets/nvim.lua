@@ -20,6 +20,10 @@ api.nvim_set_hl(0, 'DiagnosticError', { fg='#73545a' }) -- blend between bg & te
 api.nvim_set_hl(0, 'DiagnosticHint', { fg='#6d6316' }) -- blend between bg & solarized yellow
 api.nvim_set_hl(0, 'DiagnosticWarn', { fg='#6d6316' })
 
+-- make lsp inlay hints look nice
+-- TODO: just use solarized-osaka or something to get better highlighting
+api.nvim_set_hl(0, 'LspInlayHint', { link = 'Comment' })
+
 ---- General Settings ---
 -- indent stuff
 opt.ts = 2

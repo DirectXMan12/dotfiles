@@ -12,17 +12,6 @@ let
 			hash = "sha256-qV2gfNU7Du0JsM3CwaoW/w+JZ5N4JCGfEGr/tC3TVwM=";
 		};
 	};
-	# upstream isn't up-to-date with treesitter
-	nvim-solarized-lua-local = pkgs.vimUtils.buildVimPlugin {
-		pname = "nvim-solarized-lua";
-		version = "1.0-2024-02-03";
-		src = pkgs.fetchFromGitHub {
-			owner = "directxman12";
-			repo = "nvim-solarized-lua";
-			rev = "479f442f518f9acb3d57f2ebc7b2146044d3b8a5";
-      sha256 = "sha256-l/bTVBpjB187DdvWA+mP0vVXUF/3jItn3OLEh4YnU9k=";
-		};
-	};
 in
 {
 	programs.neovim = {
@@ -140,6 +129,12 @@ in
 
 							-- always show the sign column, so we don't flicker
 							vim.opt.signcolumn = 'yes'
+
+							-- show inlay hints, if available
+							local client = vim.lsp.get_client_by_id(ev.data.client_id)
+							if client.server_capabilities.inlayHintProvider then
+								vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+							end
 						end
 					})
 				'';
@@ -154,7 +149,8 @@ in
 			}
 
 			# visual
-			{ plugin = nvim-solarized-lua-local; } # colors! with treesitter support
+			# TODO: switch to solarized-osaka or something with better support for inlay hints, etc
+			nvim-solarized-lua # colors! with treesitter support
 			# status line...
 			{
 				plugin = lualine-nvim;
@@ -180,21 +176,40 @@ in
 			vim-fugitive # git!
 			{ plugin = neomake; optional = true; } # tbh i don't use this much but it's nice to have around
 			# extra helpers for the rust lsp integration
+			# rust-tools-nvim is deprecated, use rustaceanvim
+			# {
+			# 	plugin = rust-tools-nvim;
+			# 	type = "lua";
+			# 	config = ''
+			# 		require('rust-tools').setup {
+			# 			server = { -- would be passed to LSP config
+			# 				settings = {
+			# 					['rust-analyzer'] = {
+			# 						assist = {
+			# 							importGranularity = 'module',
+			# 							importPrefix = 'by_self',
+			# 						},
+			# 						cargo = { loadOutDirsFromCheck = true, },
+			# 						procMacro = { enable = true, },
+			# 					},
+			# 				},
+			# 			},
+			# 		}
+			# 	'';
+			# }
 			{
-				plugin = rust-tools-nvim;
+				plugin = rustaceanvim;
 				type = "lua";
 				config = ''
-					require('rust-tools').setup {
-						server = { -- would be passed to LSP config
-							settings = {
-								['rust-analyzer'] = {
-									assist = {
-										importGranularity = 'module',
-										importPrefix = 'by_self',
-									},
-									cargo = { loadOutDirsFromCheck = true, },
-									procMacro = { enable = true, },
+					vim.g.rustaceanvim = {
+						default_settings = {
+							['rust-analyzer'] = {
+								assist = {
+									importGranularity = 'module',
+									importPrefix = 'by_self',
 								},
+								cargo = { loadOutDirsFromCheck = true, },
+								procMacro = { enable = true, },
 							},
 						},
 					}
