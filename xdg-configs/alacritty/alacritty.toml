@@ -1,3 +1,4 @@
+[general]
 import = ["/home/directxman12/.config/alacritty/solarized-dark-custom.toml"]
 live_config_reload = true
 
