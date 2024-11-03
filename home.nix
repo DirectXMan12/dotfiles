@@ -42,6 +42,7 @@ in
 		wget
 		curl
 		alacritty-apply.packages.${system}.default
+		htop
 
 		# till the latest in nixos
 		(obsidian.overrideAttrs rec {
