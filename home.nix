@@ -46,10 +46,10 @@ in
 
 		# till the latest in nixos
 		(obsidian.overrideAttrs rec {
-			version = "1.4.16";
+			version = "1.7.5";
 			src = fetchurl {
 				url = "https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/obsidian-${version}.tar.gz";
-				hash = "sha256-PBKLGs3MZyarSMiWnjqY7d9bQrKu2uLAvLUufpHLxcw=";
+				hash = "sha256-T177UqPnPLM/2dGUdwhK21AByYrJu9wgEKOWrrGBQkA=";
 			};
 		})
 
