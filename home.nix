@@ -5,6 +5,7 @@ let
 	term-at-opener = pkgs.writeScriptBin "term-at.sh" (builtins.readFile ./scripts/term-at.sh);
 	github-opener = pkgs.writeScriptBin "open-github.nu" (builtins.readFile ./scripts/open-github.nu);
 	move-ws-to-output = pkgs.writeScriptBin "move-ws-to-output" (builtins.readFile ./scripts/move-ws-to-output.nu);
+	rfc-opener = pkgs.writeScriptBin "open-rfc.nu" (builtins.readFile ./scripts/open-rfc.nu);
 
 in
 
@@ -110,6 +111,7 @@ in
 		defaultApplications = {
 			"x-scheme-handler/term-at" = ["term-at-scheme-handler.desktop"];
 			"x-scheme-handler/github" = ["github-scheme-handler.desktop"];
+			"x-scheme-handler/rfc" = ["rfc-scheme-handler.desktop"];
 
 			# manually manage chrome's defaults
 			"text/html" = ["google-chrome-unstable.desktop"];
@@ -135,6 +137,14 @@ in
 			terminal = false;
 			startupNotify = false;
 			mimeType = [ "x-scheme-handler/github" ];
+		};
+		rfc-scheme-handler = {
+			name = "rfc Scheme Handler";
+			exec = "${rfc-opener}/bin/open-rfc.nu %u";
+			type = "Application";
+			terminal = false;
+			startupNotify = false;
+			mimeType = [ "x-scheme-handler/rfc" ];
 		};
 	};
 
