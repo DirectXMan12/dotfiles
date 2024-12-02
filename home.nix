@@ -67,7 +67,7 @@ in
 
 		# fonts for all this stuff
 		font-awesome
-		(nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
+		nerd-fonts.dejavu-sans-mono
 		noto-fonts
 		noto-fonts-emoji
 		noto-fonts-cjk-serif
