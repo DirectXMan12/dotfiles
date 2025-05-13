@@ -12,6 +12,18 @@ let
 			hash = "sha256-qV2gfNU7Du0JsM3CwaoW/w+JZ5N4JCGfEGr/tC3TVwM=";
 		};
 	};
+
+	# carries patch to fix the gui=reverse tabline issue with nvim 0.11.0
+	nvim-solarized-lua-local = pkgs.vimUtils.buildVimPlugin {
+		pname = "nvim-solarized-lua";
+		version = "1.0-2025-05-13";
+		src = pkgs.fetchFromGitHub {
+			owner = "directxman12";
+			repo = "nvim-solarized-lua";
+			rev = "c93e4661f2b785d3910d9a3f0ea56bde3b5fbd39";
+			sha256 = "sha256-0m8e3QPzpZnEAIo0K3Gr1DXlbdvmV/ZtnDw+XI3bkIM=";
+		};
+	};
 in
 {
 	programs.neovim = {
@@ -150,7 +162,7 @@ in
 
 			# visual
 			# TODO: switch to solarized-osaka or something with better support for inlay hints, etc
-			nvim-solarized-lua # colors! with treesitter support
+			nvim-solarized-lua-local # colors! with treesitter support
 			# status line...
 			{
 				plugin = lualine-nvim;
