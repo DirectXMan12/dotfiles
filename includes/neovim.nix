@@ -214,16 +214,18 @@ in
 				type = "lua";
 				config = ''
 					vim.g.rustaceanvim = {
-						default_settings = {
-							['rust-analyzer'] = {
-								assist = {
-									importGranularity = 'module',
-									importPrefix = 'by_self',
+						server = {
+							default_settings = {
+								['rust-analyzer'] = {
+									assist = {
+										importGranularity = 'module',
+										importPrefix = 'by_self',
+									},
+									cargo = { loadOutDirsFromCheck = true, },
+									procMacro = { enable = true, },
 								},
-								cargo = { loadOutDirsFromCheck = true, },
-								procMacro = { enable = true, },
 							},
-						},
+						}
 					}
 
 					-- work around github:neovim/neovim#30985 until
