@@ -43,7 +43,7 @@ in
 		ripgrep
 		wget
 		curl
-		alacritty-apply.packages.${system}.default
+		alacritty-apply.packages.${stdenv.hostPlatform.system}.default
 		htop
 
 		# till the latest in nixos
@@ -70,7 +70,7 @@ in
 		font-awesome
 		nerd-fonts.dejavu-sans-mono
 		noto-fonts
-		noto-fonts-emoji
+		noto-fonts-color-emoji
 		noto-fonts-cjk-serif
 		noto-fonts-cjk-sans
 		dejavu_fonts
