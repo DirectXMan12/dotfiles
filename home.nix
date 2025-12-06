@@ -13,6 +13,7 @@ in
 	# load separate files
 	imports = [
 		./includes/neovim.nix
+		./includes/jj.nix
 	];
 
 	# Home Manager needs a bit of information about you and the paths it should
