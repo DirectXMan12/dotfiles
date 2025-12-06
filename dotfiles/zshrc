@@ -37,6 +37,9 @@ compinit
 
 zmodload zsh/complist
 
+# jj completions
+source <(COMPLETE=zsh jj)
+
 # history options
 HISTFILE=~/.local/share/histfile.zsh
 HISTSIZE=2000
