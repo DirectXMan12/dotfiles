@@ -50,3 +50,7 @@ vim.g.mapleader = " " -- <space>
 -- ln is normally lnoremap, which has like zero need for an abbreviation;
 -- lne is a much better use
 cmd.cabbrev('ln', 'lne')
+
+---- Built-in Plugins ----
+-- undotree: adds Undotree for navigating the undotree
+cmd.packadd 'nvim.undotree'

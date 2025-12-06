@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, neovim-nightly, ... }:
 
 let
 	obsidian-nvim = pkgs.vimUtils.buildVimPlugin {
@@ -24,11 +24,33 @@ let
 			sha256 = "sha256-0m8e3QPzpZnEAIo0K3Gr1DXlbdvmV/ZtnDw+XI3bkIM=";
 		};
 	};
+	# telescope-jj = pkgs.vimUtils.buildVimPlugin {
+	# 	pname = "telescope-jj";
+	# 	version = "1.0-2025-12-05";
+	# 	src = pkgs.fetchFromGitHub {
+	# 		owner = "zschreur";
+	# 		repo = "telescope-jj";
+	# 		rev = "9527e39f30eded7950ca127698422ec412d633c4";
+	# 		sha256 = "";
+	# 	};
+	# };
+	jj-nvim = pkgs.vimUtils.buildVimPlugin {
+		pname = "jj-nvim";
+		version = "v0.1.0+2025-12-05";
+		src = pkgs.fetchFromGitHub {
+			owner = "NicolasGB";
+			repo = "jj.nvim";
+			rev = "ddfd6e0b564669861b6ed03871bb649724a6a527";
+			sha256 = "sha256-IU1u67fupQjVu3Yw3VmxWjBsMRPJpBTTShz+7hFFpk0=";
+		};
+	};
 in
 {
 	programs.neovim = {
 		enable = true;
 		# this is gonna be latest anyway, no need to override package
+
+		package = neovim-nightly.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
 		# set {vi,vim} to nvim
 		viAlias = true;
@@ -186,6 +208,7 @@ in
 
 			# external integrations
 			vim-fugitive # git!
+			jj-nvim # jj, hopefully like vim-fugitive
 			{ plugin = neomake; optional = true; } # tbh i don't use this much but it's nice to have around
 			# extra helpers for the rust lsp integration
 			# rust-tools-nvim is deprecated, use rustaceanvim
@@ -277,6 +300,7 @@ in
 					vim.keymap.set('n', '<leader>ft', require('telescope.builtin').treesitter)
 				'';
 			}
+			# telescope-jj # jj, not currently actively configured with a key
 		];
 	};
 }

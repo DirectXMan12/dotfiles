@@ -1,4 +1,4 @@
-{ config, pkgs, alacritty-apply, ... }:
+{ config, pkgs, alacritty-apply, browser-previews, neovim-nightly, ... }:
 
 let
 	# don't actually install this
