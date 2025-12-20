@@ -11,6 +11,10 @@ let
 			rev = "430bee736fc48170362f38ba1217596d241abdaa";
 			hash = "sha256-qV2gfNU7Du0JsM3CwaoW/w+JZ5N4JCGfEGr/tC3TVwM=";
 		};
+
+		dependencies = with pkgs.vimPlugins; [
+			plenary-nvim
+		];
 	};
 
 	# carries patch to fix the gui=reverse tabline issue with nvim 0.11.0
@@ -207,6 +211,22 @@ in
 			barbar-nvim
 
 			# external integrations
+			{
+				plugin = markview-nvim;
+				type = "lua";
+				config = ''
+					require('markview').setup {
+						preview = {
+							-- manually enable if we want it
+							enable = false,
+							-- don't flicker back and forth on insert
+							enable_hybrid_mode = true,
+							modes = { "i", "n", "no", "c" },
+							hybrid_modes = { "i" },
+						},
+					}
+				'';
+			}
 			vim-fugitive # git!
 			jj-nvim # jj, hopefully like vim-fugitive
 			{ plugin = neomake; optional = true; } # tbh i don't use this much but it's nice to have around
