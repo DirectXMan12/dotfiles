@@ -28,6 +28,19 @@ let
 			sha256 = "sha256-0m8e3QPzpZnEAIo0K3Gr1DXlbdvmV/ZtnDw+XI3bkIM=";
 		};
 	};
+	rustaceanvim = pkgs.vimUtils.buildVimPlugin {
+		pname = "rustaceanvim";
+		version = "7.0.6";
+		src = pkgs.fetchFromGitHub {
+			owner = "mrcjkb";
+			repo = "rustaceanvim";
+			rev = "6c3785d6a230bec63f70c98bf8e2842bed924245"; # 7.0.6
+			sha256 = "sha256-t7xAQ9sczLyA1zODmD+nEuWuLnhrfSOoPu/4G/YTGdU=";
+		};
+		checkInputs = with pkgs.vimPlugins; [
+			neotest
+		];
+	};
 	# telescope-jj = pkgs.vimUtils.buildVimPlugin {
 	# 	pname = "telescope-jj";
 	# 	version = "1.0-2025-12-05";
@@ -228,7 +241,13 @@ in
 				'';
 			}
 			vim-fugitive # git!
-			jj-nvim # jj, hopefully like vim-fugitive
+			{  # jj, hopefully like vim-fugitive
+				plugin = jj-nvim;
+				type = "lua";
+				config = ''
+					require'jj'.setup{}
+				'';
+			}
 			{ plugin = neomake; optional = true; } # tbh i don't use this much but it's nice to have around
 			# extra helpers for the rust lsp integration
 			# rust-tools-nvim is deprecated, use rustaceanvim
