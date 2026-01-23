@@ -18,7 +18,7 @@ in
 				difft = {
 					# turn on light background to get difftastic to work well with
 					# solarized
-					diff-args = ["--color=always" "--syntax-highlight=on" "--background=light" "$left" "$right"];
+					diff-args = ["--color=always" "--syntax-highlight=off" "--background=light" "$left" "$right"];
 					program = "${pkgs.difftastic}/bin/difft";
 				};
 			};
