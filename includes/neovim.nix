@@ -88,59 +88,51 @@ in
 				plugin = nvim-treesitter.withAllGrammars; # highlighting and semantic-aware motions
 				type = "lua";
 				config = ''
-					require('nvim-treesitter.configs').setup {
-						highlight = { enable = true, },
-
-						-- select by param, and such
-						textobjects = {
-							select = {
-								enable = true,
-								keymaps = {
-									["ia"] = "@parameter.inner",
-									["aa"] = "@parameter.outer",
-								},
-							},
-
-							-- move between params and such
-							move = {
-								enable = true,
-								set_jumps = true,
-								goto_next_start = {
-									["]m"] = "@function.outer",
-									["]a"] = "@parameter.inner",
-								},
-								goto_next_end = {
-									["]M"] = "@function.outer",
-									["]A"] = "@parameter.outer",
-								},
-								goto_previous_start = {
-									["[m"] = "@function.outer",
-									["[a"] = "@parameter.inner",
-								},
-								goto_previous_end = {
-									["[M"] = "@function.outer",
-									["[A"] = "@parameter.outer",
-								},
+					vim.api.nvim_create_autocmd('FileType', {
+						group = vim.api.nvim_create_augroup('treesitter-install', { clear = true }),
+						pattern = { '*' },
+						callback = function() vim.treesitter.start() end,
+					})
+				'';
+			}
+			{
+				plugin = nvim-treesitter-textobjects; # change-in-arg and such
+				type = "lua";
+				config = ''
+					-- select by param, and such
+					require'nvim-treesitter-textobjects'.setup {
+						select = {
+							enable = true,
+							keymaps = {
+								["ia"] = "@parameter.inner",
+								["aa"] = "@parameter.outer",
 							},
 						},
 
-						refactor = {
-							smart_rename = {
-								enable = true,
-								keymaps = {
-									-- normally `grr` would be virtual-replace [single] r,
-									-- but that's kinda not super useful, so use it for
-									-- "rname in current scope" instead
-									smart_rename = "grr",
-								},
+						-- move between params and such
+						move = {
+							enable = true,
+							set_jumps = true,
+							goto_next_start = {
+								["]m"] = "@function.outer",
+								["]a"] = "@parameter.inner",
+							},
+							goto_next_end = {
+								["]M"] = "@function.outer",
+								["]A"] = "@parameter.outer",
+							},
+							goto_previous_start = {
+								["[m"] = "@function.outer",
+								["[a"] = "@parameter.inner",
+							},
+							goto_previous_end = {
+								["[M"] = "@function.outer",
+								["[A"] = "@parameter.outer",
 							},
 						},
 					}
 				'';
 			}
-			nvim-treesitter-textobjects # change-in-arg and such
-			nvim-treesitter-refactor # change-in-arg and such
-			playground # nice for debugging weird editor issues
 			# lsp configs & helpers
 			{
 				plugin = nvim-lspconfig;
@@ -317,7 +309,6 @@ in
 			# shortcuts
 			vim-abolish # case-preserving operations
 			vim-commentary # comment/uncomment
-			nvim-treesitter-refactor # treesitter assists for stuff that lsp normally does
 
 			# support
 			{
