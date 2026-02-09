@@ -37,7 +37,7 @@ in
 			};
 
 			revset-aliases = {
-				"immutable_heads()" = "builtin_immutable_heads() | remote_bookmarks('ci/*') | remote_bookmarks(~glob:'*/*')";
+				"immutable_heads()" = "builtin_immutable_heads() | remote_bookmarks(glob:'ci/*') | remote_bookmarks(~glob:'*/*')";
 				"unsafe_stragglers()" = "::heads(all()) & ~(::remote_bookmarks(remote=origin) | ::bookmarks() | ::git_refs())";
 			};
 		};
