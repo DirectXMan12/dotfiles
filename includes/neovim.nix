@@ -91,7 +91,12 @@ in
 					vim.api.nvim_create_autocmd('FileType', {
 						group = vim.api.nvim_create_augroup('treesitter-install', { clear = true }),
 						pattern = { '*' },
-						callback = function() vim.treesitter.start() end,
+						callback = function(args)
+							local lang = vim.treesitter.language.get_lang(args.match)
+							if vim.treesitter.language.add(lang) then
+								vim.treesitter.start(args.buf)
+							end
+						end,
 					})
 				'';
 			}
@@ -99,38 +104,36 @@ in
 				plugin = nvim-treesitter-textobjects; # change-in-arg and such
 				type = "lua";
 				config = ''
-					-- select by param, and such
+					-- select & move by param, and such
 					require'nvim-treesitter-textobjects'.setup {
-						select = {
-							enable = true,
-							keymaps = {
-								["ia"] = "@parameter.inner",
-								["aa"] = "@parameter.outer",
-							},
-						},
-
-						-- move between params and such
 						move = {
-							enable = true,
 							set_jumps = true,
-							goto_next_start = {
-								["]m"] = "@function.outer",
-								["]a"] = "@parameter.inner",
-							},
-							goto_next_end = {
-								["]M"] = "@function.outer",
-								["]A"] = "@parameter.outer",
-							},
-							goto_previous_start = {
-								["[m"] = "@function.outer",
-								["[a"] = "@parameter.inner",
-							},
-							goto_previous_end = {
-								["[M"] = "@function.outer",
-								["[A"] = "@parameter.outer",
-							},
 						},
 					}
+
+					function textobjs_select_keymap(query)
+						return function() 
+							require "nvim-treesitter-textobjects.select".select_textobject(query, "textobjects")
+						end
+					end
+					vim.keymap.set({ "x", "o" }, "ia", textobjs_select_keymap("@parameter.inner"))
+					vim.keymap.set({ "x", "o" }, "aa", textobjs_select_keymap("@parameter.outer"))
+
+					-- next start
+					vim.keymap.set({ "n", "x", "o" }, "]m", function() require "nvim-treesitter-textobjects.move".goto_next_start("@function.outer", "textobjects") end)
+					vim.keymap.set({ "n", "x", "o" }, "]a", function() require "nvim-treesitter-textobjects.move".goto_next_start("@parameter.inner", "textobjects") end)
+
+					-- next end
+					vim.keymap.set({ "n", "x", "o" }, "]M", function() require "nvim-treesitter-textobjects.move".goto_next_end("@function.outer", "textobjects") end)
+					vim.keymap.set({ "n", "x", "o" }, "]A", function() require "nvim-treesitter-textobjects.move".goto_next_end("@parameter.out", "textobjects") end)
+
+					-- prev start
+					vim.keymap.set({ "n", "x", "o" }, "[m", function() require "nvim-treesitter-textobjects.move".goto_previous_start("@function.outer", "textobjects") end)
+					vim.keymap.set({ "n", "x", "o" }, "[a", function() require "nvim-treesitter-textobjects.move".goto_previous_start("@parameter.inner", "textobjects") end)
+
+					-- prev end
+					vim.keymap.set({ "n", "x", "o" }, "[M", function() require "nvim-treesitter-textobjects.move".goto_previous_end("@function.outer", "textobjects") end)
+					vim.keymap.set({ "n", "x", "o" }, "[A", function() require "nvim-treesitter-textobjects.move".goto_previous_end("@parameter.out", "textobjects") end)
 				'';
 			}
 			# lsp configs & helpers
