@@ -12,10 +12,6 @@
 			url = "github:directxman12/alacritty-apply";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
-		neovim-nightly = {
-			url = "github:nix-community/neovim-nightly-overlay";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
 	};
 
 	outputs = { nixpkgs, home-manager, ... }@inputs:
@@ -28,7 +24,6 @@
 
 				extraSpecialArgs = {
 					alacritty-apply = inputs.alacritty-apply;
-					neovim-nightly = inputs.neovim-nightly;
 				};
 
 				# Specify your home configuration modules here, for example,

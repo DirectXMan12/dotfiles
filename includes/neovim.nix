@@ -1,4 +1,4 @@
-{ config, pkgs, neovim-nightly, ... }:
+{ config, pkgs, ... }:
 
 let
 	# carries patch to fix the gui=reverse tabline issue with nvim 0.11.0
@@ -50,8 +50,6 @@ in
 	programs.neovim = {
 		enable = true;
 		# this is gonna be latest anyway, no need to override package
-
-		package = neovim-nightly.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
 		# set {vi,vim} to nvim
 		viAlias = true;
