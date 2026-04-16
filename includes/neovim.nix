@@ -62,7 +62,10 @@ in
 			# gcc
 		];
 
-		extraLuaConfig = builtins.readFile ../snippets/nvim.lua;
+		initLua = builtins.readFile ../snippets/nvim.lua;
+
+		withRuby = false;
+		withPython3 = false;
 
 		plugins = with pkgs.vimPlugins; [
 			# system helpers
@@ -286,7 +289,8 @@ in
 				config = ''
 					require('obsidian').setup{
 						dir = "~/Documents/obsidian/notes",
-						disable_frontmatter = true,
+						frontmatter = { enabled = false, },
+						legacy_commands = false,
 					}
 				'';
 			}
