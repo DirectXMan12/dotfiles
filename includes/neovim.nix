@@ -1,22 +1,6 @@
 { config, pkgs, neovim-nightly, ... }:
 
 let
-	obsidian-nvim = pkgs.vimUtils.buildVimPlugin {
-		pname = "obsidian.nvim";
-		version = "1.14.3-alpha.1";
-
-		src = pkgs.fetchFromGitHub {
-			owner = "epwalsh";
-			repo = "obsidian.nvim";
-			rev = "430bee736fc48170362f38ba1217596d241abdaa";
-			hash = "sha256-qV2gfNU7Du0JsM3CwaoW/w+JZ5N4JCGfEGr/tC3TVwM=";
-		};
-
-		dependencies = with pkgs.vimPlugins; [
-			plenary-nvim
-		];
-	};
-
 	# carries patch to fix the gui=reverse tabline issue with nvim 0.11.0
 	nvim-solarized-lua-local = pkgs.vimUtils.buildVimPlugin {
 		pname = "nvim-solarized-lua";

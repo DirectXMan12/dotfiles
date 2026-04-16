@@ -39,10 +39,6 @@
 							"google-chrome-dev"
 							"obsidian"
 						];
-
-						nixpkgs.config.permittedInsecurePackages = [
-							"electron-25.9.0" # for obsidian, for a bit
-						];
 					})
 					./home.nix
 				];
