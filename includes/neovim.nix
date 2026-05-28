@@ -37,12 +37,12 @@ let
 	# };
 	jj-nvim = pkgs.vimUtils.buildVimPlugin {
 		pname = "jj-nvim";
-		version = "v0.1.0+2025-12-05";
+		version = "v0.7.0-pre+2026-05-27";
 		src = pkgs.fetchFromGitHub {
 			owner = "NicolasGB";
 			repo = "jj.nvim";
-			rev = "ddfd6e0b564669861b6ed03871bb649724a6a527";
-			sha256 = "sha256-IU1u67fupQjVu3Yw3VmxWjBsMRPJpBTTShz+7hFFpk0=";
+			rev = "f30eefeaf3ce19a045ff12deb065ddb60cf611e5";
+			sha256 = "sha256-vDZFba99m60Rp0Irp7EgAGk7GjX/TBTdZJJ7MkIO7OQ=";
 		};
 	};
 in
