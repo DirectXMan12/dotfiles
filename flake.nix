@@ -33,6 +33,9 @@
 						nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
 							"google-chrome-dev"
 							"obsidian"
+
+							# barbar.nvim uses the bloody json license, for gods know what reason
+							"barbar.nvim"
 						];
 					})
 					./home.nix
