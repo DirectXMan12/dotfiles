@@ -6,6 +6,7 @@ let
 	github-opener = pkgs.writeScriptBin "open-github.nu" (builtins.readFile ./scripts/open-github.nu);
 	move-ws-to-output = pkgs.writeScriptBin "move-ws-to-output" (builtins.readFile ./scripts/move-ws-to-output.nu);
 	rfc-opener = pkgs.writeScriptBin "open-rfc.nu" (builtins.readFile ./scripts/open-rfc.nu);
+	askpass = pkgs.writers.writeNuBin "askpass.nu" ("$env.PATH ++= ['${pkgs.tofi}/bin/']\n" + (builtins.readFile ./scripts/askpass.nu));
 
 in
 
@@ -176,6 +177,9 @@ in
 	};
 
 	services.ssh-agent.enable = true;
+	systemd.user.services."ssh-agent".Service.Environment = [
+		"SSH_ASKPASS=${askpass}/bin/askpass.nu"
+	];
 
 	# Let Home Manager install and manage itself.
 	programs.home-manager.enable = true;
