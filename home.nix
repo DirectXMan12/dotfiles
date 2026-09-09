@@ -15,6 +15,8 @@ in
 	imports = [
 		./includes/neovim.nix
 		./includes/jj.nix
+		./includes/nushell
+		./includes/alacritty
 	];
 
 	# Home Manager needs a bit of information about you and the paths it should
@@ -34,8 +36,6 @@ in
 	# The home.packages option allows you to install Nix packages into your
 	# environment.
 	home.packages = with pkgs; [
-		zsh
-		nushell
 		tree
 		unzip
 		dig
@@ -74,8 +74,6 @@ in
 	# Home Manager is pretty good at managing dotfiles. The primary way to manage
 	# plain files is through 'home.file'.
 	home.file = {
-		".zshrc".source = dotfiles/zshrc;
-
 		# # You can also set the file content immediately.
 		# ".gradle/gradle.properties".text = ''
 		#		org.gradle.console=verbose
@@ -91,13 +89,6 @@ in
 
 		"waybar/config".source = xdg-configs/waybar/config;
 		"waybar/style.css".source = xdg-configs/waybar/style.css;
-
-		"alacritty/alacritty.yml".source = xdg-configs/alacritty/alacritty.yml;
-		"alacritty/solarized-dark-custom.yml".source = xdg-configs/alacritty/solarized-dark-custom.yml;
-		"alacritty/solarized-light.yml".source = xdg-configs/alacritty/solarized-light.yml;
-		"alacritty/alacritty.toml".source = xdg-configs/alacritty/alacritty.toml;
-		"alacritty/solarized-dark-custom.toml".source = xdg-configs/alacritty/solarized-dark-custom.toml;
-		"alacritty/solarized-light.toml".source = xdg-configs/alacritty/solarized-light.toml;
 
 		"swaylock/config".source = xdg-configs/swaylock/config;
 		"fontconfig/conf.d/52-default-fonts.conf".source = xdg-configs/fontconfig/52-default-fonts.conf;
