@@ -56,6 +56,7 @@ in
     configFile.text = ''
       ${session-vars}
       # for light-mode and dark-mode
+      source "${pkgs.callPackage ./jj-completions.nix { jj = config.programs.jujutsu.package; }}"
       let alacritty_themes: record<light: path, dark: path> = {
         light: "${../alacritty/solarized-light.toml}",
         dark: "${../alacritty/solarized-dark-custom.toml}"
