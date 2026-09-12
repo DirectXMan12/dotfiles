@@ -30,6 +30,13 @@ $env.PROMPT_COMMAND = {||
   $"($colors.user)($user_part)($location)(ansi reset) ($"term-at://($dir)" | ansi link --text $colored_path)"
 }
 
+$env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
+  "XDG_DATA_DIRS": {
+    from_string: {|s| $s | split row (char esep) | path expand --no-symlink }
+    to_string: {|v| $v | path expand --no-symlink | str join (char esep) }
+  }
+}
+
 $env.PROMPT_COMMAND_RIGHT = {||}
 
 def term-at [location?: path] {
@@ -38,13 +45,11 @@ def term-at [location?: path] {
 }
 
 def light-mode [] {
-  alap -w=all $alacritty_themes.light;
-	gsettings set org.gnome.desktop.interface color-scheme prefer-light
+  noctalia msg theme-mode-set light
 }
 
 def dark-mode [] {
-  alap -w=all $alacritty_themes.dark;
-	gsettings reset org.gnome.desktop.interface color-scheme
+  noctalia msg theme-mode-set dark
 }
 
 alias fg = job unfreeze

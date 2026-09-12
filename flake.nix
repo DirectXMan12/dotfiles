@@ -12,9 +12,13 @@
 			url = "github:directxman12/alacritty-apply";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+		noctalia = {
+			url = "github:noctalia-dev/noctalia/cachix";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 	};
 
-	outputs = { nixpkgs, home-manager, ... }@inputs:
+	outputs = { nixpkgs, home-manager, noctalia, ... }@inputs:
 		let
 			system = "x86_64-linux";
 			pkgs = nixpkgs.legacyPackages.${system};
@@ -36,6 +40,11 @@
 
 							# barbar.nvim uses the bloody json license, for gods know what reason
 							"barbar.nvim"
+						];
+					})
+					({ config, pkgs, ... }: {
+						imports = [
+							noctalia.homeModules.default
 						];
 					})
 					./home.nix

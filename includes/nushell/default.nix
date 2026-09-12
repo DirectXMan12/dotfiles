@@ -22,6 +22,14 @@ let
   replace-prepend-pattern = name: pkgs.lib.replaceString "\${${name}:+:\$${name}}" "";
   fix-session-var = name: val: replace-if-missing-patterns (replace-prepend-pattern name val);
   session-vars = ''
+    if not ("__HM_NU_SESS_VARS_SOURCED" in $env.ENV_CONVERSIONS) {
+      $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
+        "__HM_NU_SESS_VARS_SOURCED": {
+          from_string: {|s| $s | into bool }
+          to_string: {|v| $v | into string }
+        }
+      }
+    }
     if not ($env.__HM_NU_SESS_VARS_SOURCED? | default false) {
       load-env {
         ${builtins.concatStringsSep "\n  " (pkgs.lib.mapAttrsToList (name: val:
@@ -57,10 +65,6 @@ in
       ${session-vars}
       # for light-mode and dark-mode
       source "${pkgs.callPackage ./jj-completions.nix { jj = config.programs.jujutsu.package; }}"
-      let alacritty_themes: record<light: path, dark: path> = {
-        light: "${../alacritty/solarized-light.toml}",
-        dark: "${../alacritty/solarized-dark-custom.toml}"
-      }
     '' + builtins.readFile ./config.nu;
     settings = {
       buffer_editor = "${pkgs.lib.getExe config.programs.neovim.package}";

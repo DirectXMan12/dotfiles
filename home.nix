@@ -1,4 +1,4 @@
-{ config, pkgs, alacritty-apply, browser-previews, ... }:
+{ config, pkgs, browser-previews, ... }:
 
 let
 	# don't actually install this
@@ -7,6 +7,7 @@ let
 	move-ws-to-output = pkgs.writeScriptBin "move-ws-to-output" (builtins.readFile ./scripts/move-ws-to-output.nu);
 	rfc-opener = pkgs.writeScriptBin "open-rfc.nu" (builtins.readFile ./scripts/open-rfc.nu);
 	askpass = pkgs.writers.writeNuBin "askpass.nu" ("$env.PATH ++= ['${pkgs.tofi}/bin/']\n" + (builtins.readFile ./scripts/askpass.nu));
+	launcher = pkgs.writers.writeNuBin "launcher.nu" (builtins.readFile ./scripts/launcher.nu);
 
 in
 
@@ -17,6 +18,7 @@ in
 		./includes/jj.nix
 		./includes/nushell
 		./includes/alacritty
+		./includes/noctalia.nix
 	];
 
 	# Home Manager needs a bit of information about you and the paths it should
@@ -44,7 +46,6 @@ in
 		ripgrep
 		wget
 		curl
-		alacritty-apply.packages.${stdenv.hostPlatform.system}.default
 		htop
 
 		# till the latest in nixos
@@ -84,6 +85,9 @@ in
 	# (and for .config dirs)
 	xdg.configFile = {
 		"sway/config".source = xdg-configs/sway/config;
+		"sway/config.d.after/launch-noctalia".text = ''
+			exec "TERMINAL=${pkgs.lib.getExe launcher} noctalia"
+		'';
 		"tofi/config".source = xdg-configs/tofi/config;
 		"kanshi/config".source = xdg-configs/kanshi/config;
 
@@ -116,6 +120,7 @@ in
 			terminal = false;
 			startupNotify = false;
 			mimeType = [ "x-scheme-handler/term-at" ];
+			noDisplay = true;
 		};
 		github-scheme-handler = {
 			name = "github Scheme Handler";
@@ -124,6 +129,7 @@ in
 			terminal = false;
 			startupNotify = false;
 			mimeType = [ "x-scheme-handler/github" ];
+			noDisplay = true;
 		};
 		rfc-scheme-handler = {
 			name = "rfc Scheme Handler";
@@ -132,6 +138,7 @@ in
 			terminal = false;
 			startupNotify = false;
 			mimeType = [ "x-scheme-handler/rfc" ];
+			noDisplay = true;
 		};
 	};
 

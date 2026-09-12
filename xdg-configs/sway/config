@@ -21,7 +21,7 @@ set $term nu -c 'def main [...args] { try { alacritty msg create-window ...$args
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu tofi-run --require-match=false | xargs swaymsg exec --
+set $menu noctalia msg panel-open launcher
 
 # TODO(directxman12): switch to unstable when i can patch it back in
 #set $browser google-chrome-unstable --enable-features=UseOzonePlatform --ozone-platform=wayland
@@ -36,17 +36,6 @@ set $cage cage -d --
 # output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # darkened solarize $base01, looks nice
 output * bg '#3f4f54' solid_color
-
-### Idle configuration
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-exec swayidle -w \
-		 timeout 300 'swaylock -f' \
-		 lock 'swaylock -f' \
-		 timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-		 before-sleep 'swaylock -f'
 
 ### Input configuration
 #
@@ -75,7 +64,7 @@ default_border pixel
 
 	# Start your launcher
 	bindsym $mod+p exec $menu
-	bindsym $mod+x exec echo "" | tofi --prompt "nix run nixpkgs#" --require-match=false | cut -d' ' -f1- | awk '{fst=$1; $1=""; print "nixpkgs#" fst " --" $0 }' | xargs swaymsg exec -- nix run
+	bindsym $mod+x exec echo "" | noctalia dmenu -p "nix run nixpkgs#" | cut -d' ' -f1- | awk '{fst=$1; $1=""; print "nixpkgs#" fst " --" $0 }' | xargs swaymsg exec -- nix run
 
 	# Drag floating windows by holding down $mod and left mouse button.
 	# Resize them with right mouse button + $mod.
@@ -142,8 +131,8 @@ default_border pixel
 	# We just use 1-10 as the default.
 
 	# custom named workspaces
-	bindsym $mod+slash exec swaymsg -t get_workspaces | jq '.[].name' -r | tofi --prompt-text "switch to " --require-match=false | xargs swaymsg workspace
-	bindsym $mod+Shift+slash exec swaymsg -t get_workspaces | jq '.[].name' -r | tofi --prompt-text "send to " --require-match=false | xargs swaymsg move container to workspace
+	bindsym $mod+slash exec swaymsg -t get_workspaces | jq '.[].name' -r | noctalia dmenu -p "switch to " | xargs swaymsg workspace
+	bindsym $mod+Shift+slash exec swaymsg -t get_workspaces | jq '.[].name' -r | noctalia dmenu -p "send to " | xargs swaymsg move container to workspace
 
 	# moving workspaces
 	bindsym $mod+Shift+w move workspace to output left
@@ -188,6 +177,16 @@ default_border pixel
 	# Show the next scratchpad window or hide the focused scratchpad window.
 	# If there are multiple scratchpad windows, this command cycles through them.
 	bindsym $mod+minus scratchpad show
+
+#
+# Media Keys
+#
+bindsym --locked XF86AudioRaiseVolume exec noctalia msg volume-up
+bindsym --locked XF86AudioLowerVolume exec noctalia msg volume-down
+bindsym --locked XF86AudioMute exec noctalia msg volume-mute
+bindsym --locked XF86MonBrightnessUp exec noctalia msg brightness-up
+bindsym --locked XF86MonBrightnessDown exec noctalia msg brightness-down
+
 #
 # Resizing containers:
 #
@@ -224,23 +223,12 @@ bindsym Print exec grimshot copy screen
 bindsym Shift+Print exec grimshot copy area
 bindsym $mod+Shift+Print exec grimshot save active
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-	swaybar_command waybar
-}
-
 include /etc/sway/config.d/*
 
 #
 # startup software
 #
 
-# notifications
-exec "/run/current-system/sw/bin/mako"
 # network manager icon
 exec "/run/current-system/sw/bin/nm-applet --indicator"
-# hotplug screens
-exec "/run/current-system/sw/bin/kanshi"
+include ~/.config/sway/config.d.after/*
