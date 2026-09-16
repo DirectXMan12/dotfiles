@@ -35,6 +35,10 @@ $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
     from_string: {|s| $s | split row (char esep) | path expand --no-symlink }
     to_string: {|v| $v | path expand --no-symlink | str join (char esep) }
   }
+  "XDG_CONFIG_DIRS": {
+    from_string: {|s| $s | split row (char esep) | path expand --no-symlink }
+    to_string: {|v| $v | path expand --no-symlink | str join (char esep) }
+  }
 }
 
 $env.PROMPT_COMMAND_RIGHT = {||}
