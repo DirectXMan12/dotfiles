@@ -9,9 +9,14 @@ in
 		settings = {
 			"merge-tools" = {
 				# diff editor
-				"nvim-difftool" = {
-					program = "vim";
+				"nvim" = {
+					program = "nvim";
 					edit-args = ["-c" "packadd nvim.difftool" "-c" "DiffTool $left $right"];
+					merge-args = ["-f" "-d" "$output" "-M" "$left" "$base" "$right"
+												"-c" "wincmd J" "-c" "set modifiable" "-c" "set write"
+												"-c" "/<<<<<</+2"];
+					merge-tool-edits-conflict-markers = true;
+					diff-args = [];
 				};
 
 				# for diff viewing
@@ -24,8 +29,8 @@ in
 			};
 			ui = {
 				editor = "vim"; # neovim
-				diff-editor = "nvim-difftool";
-				merge-editor = "vimdiff";
+				diff-editor = "nvim";
+				merge-editor = "nvim";
 			};
 			user = {
 				name = "Solly Ross";
