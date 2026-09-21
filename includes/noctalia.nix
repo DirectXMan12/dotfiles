@@ -26,6 +26,7 @@
 				greeter_sync.auto_sync = true;
 				launch_apps_custom_command = "swaymsg exec -- $CMD";
 				animation.enabled = false;
+				polkit_agent = true;
 
 				launcher.dmenu.entry = {
 					"nix-run" = {
