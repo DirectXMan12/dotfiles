@@ -59,7 +59,9 @@ in
     # equivalent of sourcing hm-session-vars, minus any extras
     # TODO: we should probably assert for empty extras
     environmentVariables = {
-      SHELL = pkgs.lib.getExe config.programs.nushell.package;
+      # SHELL = pkgs.lib.getExe config.programs.nushell.package;
+      # need this to have this _also _show up in /etcshells
+      SHELL = "${config.home.homeDirectory}/.nix-profile/bin/nu";
     };
     configFile.text = ''
       ${session-vars}
