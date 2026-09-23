@@ -44,9 +44,9 @@ let
               to_string: {|v| $v | path expand --no-symlink | str join (char esep) }
             }
           }
-          $env.${toNushell name} ++= [
+          $env.${toNushell name} = ($env.${toNushell name}? | default [] | [
             ${builtins.concatStringsSep "\n  " (builtins.map (item: replace-if-missing-patterns item) val)}
-          ]
+          ])
         ''
       ) config.home.sessionSearchVariables)}
       $env.__HM_NU_SESS_VARS_SOURCED = true
