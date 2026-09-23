@@ -19,7 +19,7 @@
 				command = "xdg-open";
 				hyperlinks = true;
 				post_processing = true;
-				regex = ''(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:|github:|rfc:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+'';
+				regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:|github:|rfc:)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`\\\\]+";
 				mouse = {
 					enabled = true;
 					mods = "Control";
