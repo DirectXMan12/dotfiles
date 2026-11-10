@@ -56,6 +56,8 @@ in
 {
   programs.nushell = {
     enable = true;
+		# we do that above instead of loading them dynamically
+		loadSessionVariables = false;
     # equivalent of sourcing hm-session-vars, minus any extras
     # TODO: we should probably assert for empty extras
     environmentVariables = {
